@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MIDI Generator</title>
+  <link href="css/midi_generator.css" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <h1>MIDI Generator</h1>
+    <p class="sub">Define the structure and allowed notes; each time generates a different song.</p>
+    
+    <section>
+      <h2>Filename and tempo</h2>
+      <div class="grid">
+        <label class="f"><b>Filename</b><input type="text" id="fname" value="mid-sample"></label>
+        <label class="f"><b>BPM <span id="bpmV">180</span></b><input type="range" id="bpm" min="10" max="290" value="180"></label>
+        <label class="f"><b>Silence probability <span id="silV">0.25</span></b><input type="range" id="sil" min="0" max="1" step="0.05" value="0.25"></label>
+        <!--label class="f"><b>Instrument</b-->
+        <select hidden="true" id="prog"><option value="0">Piano</option><option value="11">Vibráfono</option><option value="24">Guitarra de nylon</option><option value="48">Cuerdas</option><option value="73">Flauta</option><option value="80">Sintetizador</option></select></label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Allowed notes</h2>
+      <p class="hint">Click on the piano keys to activate or take them out (C3 to B5).</p>
+      <div class="scroll"><div id="piano"></div></div>
+    </section>
+
+    <section>
+      <h2>Low, medium and high registers</h2>
+      <p class="hint">Distribute the chosen notes, from low to high.</p>
+      <div class="grid">
+        <label class="f"><b>End of lows <span id="leV"></span></b><input type="range" id="le" min="1" value="4"></label>
+        <label class="f"><b>End of mediums <span id="meV"></span></b><input type="range" id="me" min="1" value="7"></label>
+      </div>
+      <p class="hint" id="rangeInfo" style="margin:10px 0 0"></p>
+    </section>
+
+    <section>
+      <h2>Note durations</h2>
+      <p class="hint">Each type randomly choose between the checked options.</p>
+      <div class="dur" id="dur"></div>
+    </section>
+
+    <section>
+      <h2>Song structure</h2>
+      <p class="hint">Rows with the same pattern, duration and register repeat themselves. Fast(short) durations generates up and down sequences (Experimental, may sound choppy).</p>
+      <div class="row head"><span>Pattern</span><span>Duration</span><span>Register</span><span></span></div>
+      <div id="rows"></div>
+      <button id="add" type="button">Add row</button>
+    </section>
+
+    <div class="bar">
+      <button class="p" id="gen" type="button">Generate</button>
+      <button id="play" type="button" disabled>Play</button>
+      <button id="stop" type="button" disabled>Stop</button>
+      <button id="dl" type="button" disabled>Download .mid</button>
+    </div>
+    <div id="status" role="status"></div>
+  </main>
+
+<script type="text/javascript" src="js/midi_generator.js"></script>
+</body>
+</html>
